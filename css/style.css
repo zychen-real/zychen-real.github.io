@@ -90,41 +90,8 @@ a:hover { text-decoration: underline; }
   color: #8b949e;
 }
 
-/* ---------------- Toy 页面卡片 ---------------- */
-.toy-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 18px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.toy-card {
-  border: 1px solid #e8ebef;
-  border-radius: 10px;
-  padding: 18px 20px;
-  transition: border-color .16s ease, box-shadow .16s ease;
-}
-.toy-card:hover {
-  border-color: #1f6feb;
-  box-shadow: 0 4px 16px rgba(27, 31, 35, .08);
-}
-.toy-card h3 { margin: 0 0 6px; font-size: 16px; }
-.toy-card p { margin: 0; font-size: 14px; color: #57606a; line-height: 1.75; }
-
-.empty-note {
-  border: 1px dashed #d0d7de;
-  border-radius: 10px;
-  padding: 28px 20px;
-  text-align: center;
-  color: #8b949e;
-  font-size: 14.5px;
-}
-
 @media (max-width: 768px) {
   .intro-header { padding: 52px 0 44px; }
   .intro-title { font-size: 30px; }
   .intro-subtitle { font-size: 15px; }
-  .nav-links { gap: 16px; }
-  .nav-links a { font-size: 14px; }
 }
