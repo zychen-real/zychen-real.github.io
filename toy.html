@@ -1,0 +1,35 @@
+---
+layout: page
+title: "Toy"
+description: "Screen recordings of side projects I have hacked together"
+permalink: /toy/
+---
+
+{%- comment -%}
+  这一页是首页 "About This Site" 段落里链接到的目标，先建好骨架，
+  避免那个链接指向 404。往后往 toy 数组里加条目即可，
+  card 样式在 css/style.css 的 .toy-list / .toy-card。
+{%- endcomment -%}
+
+{%- assign toys = site.data.toys -%}
+
+{%- if toys and toys.size > 0 -%}
+<ul class="toy-list">
+  {%- for toy in toys %}
+  <li class="toy-card">
+    <h3>
+      {%- if toy.url -%}
+        <a href="{{ toy.url }}" target="_blank" rel="noopener">{{ toy.name }}</a>
+      {%- else -%}
+        {{ toy.name }}
+      {%- endif -%}
+    </h3>
+    <p>{{ toy.desc }}</p>
+  </li>
+  {%- endfor %}
+</ul>
+{%- else -%}
+<div class="empty-note">
+  Nothing here yet — recordings are on the way.
+</div>
+{%- endif -%}

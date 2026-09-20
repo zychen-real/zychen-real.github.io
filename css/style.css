@@ -1,0 +1,130 @@
+/* ===============================================================
+ * 全站基础样式
+ * about.html 自带一套 .about-me 作用域内的样式，这里只负责
+ * 骨架（导航 / 页头 / 内容容器 / 页脚）和排版底色，避免互相打架。
+ * =============================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+               "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #24292f;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: #1f6feb; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------------- 顶部导航 ---------------- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid #e8ebef;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 58px;
+}
+.nav-brand {
+  font-weight: 700;
+  font-size: 16px;
+  color: #1f2328;
+  letter-spacing: -0.2px;
+}
+.nav-brand:hover { color: #1f6feb; text-decoration: none; }
+.nav-links { display: flex; gap: 22px; }
+.nav-links a {
+  font-size: 14.5px;
+  color: #57606a;
+}
+.nav-links a:hover { color: #1f6feb; text-decoration: none; }
+
+/* ---------------- 页头 ---------------- */
+.intro-header {
+  background: linear-gradient(135deg, #1b2430 0%, #2b3a55 100%);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 72px 0 60px;
+}
+.intro-title {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+}
+.intro-subtitle {
+  margin: 10px 0 0;
+  font-size: 16.5px;
+  color: rgba(255, 255, 255, .82);
+  font-weight: 400;
+}
+
+/* ---------------- 正文 ---------------- */
+.page-content { padding: 44px 0 72px; }
+
+/* ---------------- 页脚 ---------------- */
+.site-footer {
+  border-top: 1px solid #e8ebef;
+  padding: 26px 0 34px;
+  font-size: 13.5px;
+  color: #8b949e;
+}
+
+/* ---------------- Toy 页面卡片 ---------------- */
+.toy-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.toy-card {
+  border: 1px solid #e8ebef;
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: border-color .16s ease, box-shadow .16s ease;
+}
+.toy-card:hover {
+  border-color: #1f6feb;
+  box-shadow: 0 4px 16px rgba(27, 31, 35, .08);
+}
+.toy-card h3 { margin: 0 0 6px; font-size: 16px; }
+.toy-card p { margin: 0; font-size: 14px; color: #57606a; line-height: 1.75; }
+
+.empty-note {
+  border: 1px dashed #d0d7de;
+  border-radius: 10px;
+  padding: 28px 20px;
+  text-align: center;
+  color: #8b949e;
+  font-size: 14.5px;
+}
+
+@media (max-width: 768px) {
+  .intro-header { padding: 52px 0 44px; }
+  .intro-title { font-size: 30px; }
+  .intro-subtitle { font-size: 15px; }
+  .nav-links { gap: 16px; }
+  .nav-links a { font-size: 14px; }
+}

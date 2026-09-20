@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {%- comment -%}
+    页面标题：首页只显示站点名，内页显示「页面名 · 站点名」，
+    避免出现 "Ziyao Chen - Ziyao Chen" 这种重复。
+  {%- endcomment -%}
+  {%- if page.title and page.title != site.title -%}
+    <title>{{ page.title }} · {{ site.title }}</title>
+  {%- else -%}
+    <title>{{ site.title }}</title>
+  {%- endif -%}
+
+  <meta name="author" content="{{ site.author }}">
+  <meta name="description" content="{{ page.description | default: site.description }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page.title | default: site.title }}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+  {%- feed_meta -%}
+</head>
+
+<body class="{{ page.body-class }}">
+
+  <nav class="site-nav">
+    <div class="wrap nav-inner">
+      <a class="nav-brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      <div class="nav-links">
+        <a href="{{ '/' | relative_url }}">About</a>
+        <a href="{{ '/toy/' | relative_url }}">Toy</a>
+        <a href="https://github.com/{{ site.github_username | default: 'zychen-real' }}"
+           target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  {{ content }}
+
+  <footer class="site-footer">
+    <div class="wrap">
+      &copy; {{ 'now' | date: "%Y" }} {{ site.author }}
+      &nbsp;·&nbsp;
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+    </div>
+  </footer>
+
+</body>
+</html>

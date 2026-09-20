@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+{%- comment -%}
+  页头统一在这里渲染 page.title / page.description，
+  所以正文（例如 about.html）不需要再写一遍 h1，避免同页两个姓名标题。
+
+  header-img 是可选的：给了就叠在渐变底色上；文件不存在时
+  浏览器只是加载失败，下面的渐变仍然正常显示，不会出现破图。
+{%- endcomment -%}
+<header class="intro-header{% if page.header-img %} has-img{% endif %}"
+        {%- if page.header-img %} style="background-image: linear-gradient(135deg, rgba(20,26,38,.72), rgba(20,26,38,.45)), url('{{ page.header-img | relative_url }}');"{% endif %}>
+  <div class="wrap">
+    <h1 class="intro-title">{{ page.title }}</h1>
+    {%- if page.description %}
+    <p class="intro-subtitle">{{ page.description }}</p>
+    {%- endif %}
+  </div>
+</header>
+
+<main class="page-content">
+  <div class="wrap">
+    {{ content }}
+  </div>
+</main>

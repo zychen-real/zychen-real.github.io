@@ -1,0 +1,40 @@
+# ---------------------------------------------------------------
+# 站点基本信息
+# ---------------------------------------------------------------
+title: "Ziyao Chen"
+description: "Search & LLM @ Weixin AI, Tencent"
+email: "yateschen@tencent.com"
+github_username: "zychen-real"
+
+# GitHub Pages 用户站点（<user>.github.io）根目录就是站点根，
+# 所以 baseurl 留空，url 写完整域名。
+url: "https://zychen-real.github.io"
+baseurl: ""
+
+author: "Ziyao Chen"
+lang: "en"
+
+# ---------------------------------------------------------------
+# 构建设置
+# ---------------------------------------------------------------
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# GitHub Pages 官方支持的插件，本地 / 线上行为一致
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+
+# 这些文件不参与构建输出
+exclude:
+  - PAT
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle

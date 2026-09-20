@@ -1,0 +1,23 @@
+# 鉴权凭据，绝对不能提交
+PAT
+*.pat
+.env
+.env.*
+
+# Jekyll 构建产物
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Ruby
+Gemfile.lock
+vendor/
+.bundle/
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

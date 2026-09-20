@@ -1,0 +1,434 @@
+---
+layout: page
+title: "Ziyao Chen"
+description: "Search & LLM @ Weixin AI, Tencent"
+permalink: /
+body-class: about-page
+---
+
+<style>
+  .about-me{ max-width: 860px; margin: 0 auto; }
+
+  .about-me .am-name{
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    margin: 0 0 6px;
+    color: #1f2328;
+  }
+  .about-me .am-affil{
+    color: #424a53;
+    font-size: 15.5px;
+    line-height: 1.75;
+    margin: 0 0 16px;
+  }
+  .about-me .am-links{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    margin: 0 0 4px;
+  }
+  .about-me .am-links a{
+    display: inline-block;
+    border: 1px solid #d0d7de;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    color: #424a53;
+    text-decoration: none;
+    transition: all .16s ease;
+  }
+  .about-me .am-links a:hover{
+    border-color: #1f6feb;
+    color: #1f6feb;
+    background: #f6fafe;
+    text-decoration: none;
+  }
+
+  /* 「复制」按钮：和胶囊同一套形状，但用虚线边框区分「这不是跳转链接」 */
+  .about-me .am-copy{
+    display: inline-block;
+    border: 1px dashed #d0d7de;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    color: #57606a;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: inherit;
+    transition: all .16s ease;
+  }
+  .about-me .am-copy:hover{
+    border-color: #1f6feb;
+    border-style: solid;
+    color: #1f6feb;
+    background: #f6fafe;
+  }
+  .about-me .am-copy:focus-visible{
+    outline: 2px solid #1f6feb;
+    outline-offset: 2px;
+  }
+  /* 复制成功的瞬时反馈 */
+  .about-me .am-copy.is-done{
+    border-style: solid;
+    border-color: #1a7f37;
+    color: #1a7f37;
+    background: #f2f9f4;
+  }
+
+  /* ----------------------------------------------------------
+   * 悬停提示（data-tip）
+   * ----------------------------------------------------------
+   * 不用原生 title：它有 1~2 秒延迟、样式不可控，而这里的目的就是
+   * 「鼠标一放上去就看到邮箱」。用 ::after 取 attr(data-tip) 渲染，
+   * 内容变了会即时反映（复制成功时脚本改 data-tip 就能换文案）。
+   * 只在真正有悬停能力的设备上启用：触屏上 :hover 会在点击后粘住，
+   * 提示框赖在屏幕上不走，所以用 @media (hover: hover) 圈住。
+   * ---------------------------------------------------------- */
+  .about-me [data-tip]{ position: relative; }
+
+  @media (hover: hover) {
+    .about-me [data-tip]::after,
+    .about-me [data-tip]::before{
+      position: absolute;
+      left: 50%;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .15s ease, visibility .15s ease;
+      z-index: 6;
+    }
+    .about-me [data-tip]::after{
+      content: attr(data-tip);
+      bottom: calc(100% + 9px);
+      transform: translateX(-50%);
+      background: #1f2328;
+      color: #fff;
+      font-size: 12.5px;
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: 0;
+      padding: 6px 11px;
+      border-radius: 6px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(27, 31, 35, .22);
+    }
+    /* 指向按钮的小三角 */
+    .about-me [data-tip]::before{
+      content: "";
+      bottom: calc(100% + 3px);
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #1f2328;
+    }
+    .about-me [data-tip]:hover::after,
+    .about-me [data-tip]:hover::before,
+    .about-me [data-tip]:focus-visible::after,
+    .about-me [data-tip]:focus-visible::before{
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .about-me h2{
+    font-size: 20px;
+    font-weight: 700;
+    margin: 42px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e8ebef;
+    color: #1f2328;
+    letter-spacing: -0.2px;
+  }
+
+  .about-me p{ line-height: 1.85; margin: 0 0 16px; }
+
+  /* 时间线（工作经历） */
+  .about-me .am-timeline{
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 22px;
+    border-left: 2px solid #e8ebef;
+  }
+  .about-me .am-timeline > li{
+    position: relative;
+    padding: 0 0 26px;
+    margin: 0;
+  }
+  .about-me .am-timeline > li:last-child{ padding-bottom: 4px; }
+  .about-me .am-timeline > li::before{
+    content: "";
+    position: absolute;
+    left: -29px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #1f6feb;
+  }
+  .about-me .am-when{
+    font-size: 12.5px;
+    color: #8b949e;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .3px;
+  }
+  .about-me .am-what{
+    font-size: 15.5px;
+    font-weight: 650;
+    color: #1f2328;
+    margin: 2px 0 6px;
+  }
+  .about-me .am-desc{
+    font-size: 14px;
+    color: #57606a;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .about-me .am-kw{
+    display: inline-block;
+    background: #f6f8fa;
+    border: 1px solid #e8ebef;
+    border-radius: 5px;
+    padding: 2px 9px;
+    font-size: 12.5px;
+    color: #424a53;
+    margin: 0 5px 6px 0;
+  }
+
+  .about-me .am-foot{
+    margin-top: 44px;
+    padding-top: 18px;
+    border-top: 1px solid #e8ebef;
+    font-size: 13px;
+    color: #8b949e;
+    line-height: 1.8;
+  }
+  .about-me .am-foot a{ color: #1f6feb; }
+
+  @media (max-width: 768px){
+    .about-me .am-name{ font-size: 25px; }
+    .about-me h2{ font-size: 18px; margin-top: 34px; }
+    .about-me .am-timeline{ padding-left: 18px; }
+    .about-me .am-timeline > li::before{ left: -25px; }
+  }
+</style>
+
+<div class="about-me">
+
+{%- comment -%}
+  姓名和一句话定位由 _layouts/page.html 的 intro-header 渲染
+  （取 page.title / page.description），这里不再重复写 h1，
+  直接从机构信息开始，避免同一页出现两个姓名标题。
+{%- endcomment -%}
+
+<p class="am-affil">
+  Tech Lead, <strong>Weixin (WeChat) Search</strong> — Weixin AI, Tencent<br>
+  Guangzhou, China
+</p>
+
+<div class="am-links">
+  {%- comment -%}
+    Email 做成两个动作，因为 mailto: 只有在访客本机配好邮件客户端时才有反应
+    （没配的话点了毫无反馈，看起来就像链接坏了）：
+      - 「Email」胶囊  -> 仍是 mailto，有客户端的人体验最好
+      - 「复制」按钮   -> 没客户端 / 只想拿地址的人，一键复制
+    两者都带 data-tip，悬停即显示完整邮箱，不用再翻到页脚去找。
+    邮箱统一取 site.email，不在这里写死。
+  {%- endcomment -%}
+  <a class="am-mail" href="mailto:{{ site.email }}"
+     data-tip="{{ site.email }}"
+     aria-label="发邮件到 {{ site.email }}">Email</a>
+  <button type="button" class="am-copy"
+          data-copy-email="{{ site.email }}"
+          data-tip="{{ site.email }}"
+          aria-label="复制邮箱地址 {{ site.email }}">
+    <span class="am-copy-txt">复制</span>
+  </button>
+</div>
+
+<h2>Biography</h2>
+
+<p>
+  I work on <strong>web-scale search</strong> at Weixin AI, Tencent, where I lead the offline
+  content-understanding, retrieval and pre-ranking stack behind
+  <strong>Weixin Search</strong> — the search engine serving WeChat's user base. My interests sit at
+  the intersection of <strong>large language models</strong> and <strong>search systems</strong>:
+  how to represent and retrieve content across <strong>tens of billions of documents</strong>,
+  and how to make LLMs genuinely useful inside a production ranking funnel rather than just in
+  a demo.
+</p>
+
+<p>
+  I started at Tencent as an intern in <strong>SNG</strong> in 2018 and joined
+  <strong>Tencent Cloud</strong> full-time in 2019, back when conversational AI was the thing
+  everyone was building. I spent that period shipping chatbots — open-domain chit-chat, FAQ
+  retrieval, and KGQA over structured knowledge. In 2020 I moved internally to
+  <strong>WeChat Mini Program Search</strong>, working on ranking and on squeezing BERT into
+  production latency budgets with TensorRT. When Tencent consolidated its search efforts into
+  <strong>Weixin Search</strong> in 2021, my team came along — and we won the internal bake-off
+  against several competing engines. That system is what powers WeChat search today.
+</p>
+
+<p>
+  Since then I have rebuilt the offline content-understanding and retrieval/pre-ranking
+  architecture for both <strong>AI Search</strong> and <strong>main search</strong> from the ground
+  up; the version running in production today is that rewrite. I have also led re-architectures of
+  several vertical searches — <strong>image search</strong>, <strong>text-selection search</strong>
+  and <strong>comment search</strong> — and work closely with the fine-ranking and relevance stack.
+</p>
+
+<h2>Research Interests</h2>
+
+<p>
+  <span class="am-kw">Large Language Models</span>
+  <span class="am-kw">Search &amp; Information Retrieval</span>
+  <span class="am-kw">Content Understanding</span>
+  <span class="am-kw">Retrieval &amp; Pre-Ranking</span>
+  <span class="am-kw">Multimodal Learning</span>
+  <span class="am-kw">Inference Acceleration</span>
+</p>
+
+<h2>Work Experience</h2>
+
+<ul class="am-timeline">
+  <li>
+    <div class="am-when">2021 — Present</div>
+    <div class="am-what">Weixin (WeChat) Search · Weixin AI, Tencent</div>
+    <p class="am-desc">
+      Offline data pipelines, content understanding, retrieval and pre-ranking. Rebuilt the offline
+      understanding + retrieval/pre-ranking architecture for AI Search and main search from zero;
+      that rewrite is the version in production. Also re-architected image search,
+      text-selection search and comment search. Our engine won the company-wide internal
+      evaluation against multiple alternatives and became the shipped version of WeChat search.
+    </p>
+  </li>
+  <li>
+    <div class="am-when">2020 — 2021</div>
+    <div class="am-what">WeChat Mini Program Search · Tencent</div>
+    <p class="am-desc">
+      Fine-ranking for Mini Program search, plus BERT inference acceleration with TensorRT to fit
+      transformer models into production latency budgets.
+    </p>
+  </li>
+  <li>
+    <div class="am-when">2019 — 2020</div>
+    <div class="am-what">Tencent Cloud · Tencent</div>
+    <p class="am-desc">
+      Conversational AI: open-domain chit-chat, FAQ retrieval, and knowledge-graph question
+      answering (KGQA) for enterprise chatbot products.
+    </p>
+  </li>
+  <li>
+    <div class="am-when">2018</div>
+    <div class="am-what">SNG (Social Network Group) · Tencent — Intern</div>
+    <p class="am-desc">First taste of large-scale systems at Tencent.</p>
+  </li>
+</ul>
+
+{%- comment -%}
+  Education 复用 Work Experience 那套 .am-timeline，视觉一致、不用新增样式。
+  同样按时间倒序（最新在上），格式对齐上面的「团队 · 公司」写成「学位 · 学校」。
+  放在 Work Experience 之后：这页是工业界 Tech Lead 的定位，工作经历是主线，
+  教育经历作补充。
+{%- endcomment -%}
+<h2>Education</h2>
+
+<ul class="am-timeline">
+  <li>
+    <div class="am-when">2016 — 2019</div>
+    <div class="am-what">M.Eng. in Information Engineering · Zhejiang University</div>
+  </li>
+  <li>
+    <div class="am-when">2012 — 2016</div>
+    <div class="am-what">B.Eng. in Engineering · Zhejiang University</div>
+  </li>
+</ul>
+
+<h2>About This Site</h2>
+
+<p>
+  Notes, paper reads and small experiments — mostly on search, ranking and LLM systems.
+  The <a href="{{ '/toy/' | relative_url }}">Toy</a> section collects screen recordings of side
+  projects I have hacked together.
+</p>
+
+<div class="am-foot">
+  Built with <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a> on
+  <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>,
+  theme adapted from <a href="https://github.com/Huxpro/huxpro.github.io" target="_blank" rel="noopener">Hux Blog</a>.<br>
+  Reach me at <a href="mailto:{{ site.email }}">{{ site.email }}</a>.
+</div>
+
+</div>
+
+{%- comment -%}
+  邮箱一键复制。
+  navigator.clipboard 需要安全上下文（https 或 localhost），GitHub Pages
+  是 https 所以正常；但本地用 http://127.0.0.1 之外的方式预览、或旧浏览器
+  下拿不到这个 API，所以保留 textarea + execCommand 的兜底路径。
+  复制成功后直接改 data-tip，CSS 的 attr() 会即时把提示换成「已复制」。
+{%- endcomment -%}
+<script>
+(function () {
+  var btns = Array.prototype.slice.call(
+    document.querySelectorAll('[data-copy-email]')
+  );
+  if (!btns.length) return;
+
+  function legacyCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    // 放到视口外，且只读，避免移动端弹出键盘 / 页面跳动
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-9999px';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, ta.value.length);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  btns.forEach(function (btn) {
+    var email = btn.getAttribute('data-copy-email');
+    var txtEl = btn.querySelector('.am-copy-txt');
+    var originalTip = btn.getAttribute('data-tip');
+    var originalTxt = txtEl ? txtEl.textContent : '';
+    var timer = null;
+
+    function feedback(msg, tip, isOk) {
+      if (txtEl) txtEl.textContent = msg;
+      btn.setAttribute('data-tip', tip);
+      btn.classList.toggle('is-done', !!isOk);
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        if (txtEl) txtEl.textContent = originalTxt;
+        btn.setAttribute('data-tip', originalTip);
+        btn.classList.remove('is-done');
+      }, 1800);
+    }
+
+    btn.addEventListener('click', function () {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(function () {
+          feedback('已复制', '已复制到剪贴板', true);
+        }, function () {
+          // 权限被拒之类，退回老办法再试一次（只调一次，别重复写剪贴板）
+          var ok = legacyCopy(email);
+          feedback(ok ? '已复制' : '请手动复制',
+                   ok ? '已复制到剪贴板' : email,
+                   ok);
+        });
+      } else {
+        var ok = legacyCopy(email);
+        feedback(ok ? '已复制' : '请手动复制', ok ? '已复制到剪贴板' : email, ok);
+      }
+    });
+  });
+})();
+</script>

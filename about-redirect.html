@@ -1,0 +1,22 @@
+---
+permalink: /about/
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  {%- comment -%}
+    历史上这份简介挂在 /about/，现在它就是首页。
+    这里留一个跳转页，让旧链接 / 旧书签不至于 404。
+    canonical 指向 "/"，告诉搜索引擎真正的地址是根路径。
+  {%- endcomment -%}
+  <meta http-equiv="refresh" content="0; url={{ '/' | relative_url }}">
+  <link rel="canonical" href="{{ '/' | absolute_url }}">
+  <meta name="robots" content="noindex">
+  <title>Redirecting…</title>
+</head>
+<body>
+  <p>Redirecting to <a href="{{ '/' | relative_url }}">{{ '/' | absolute_url }}</a>…</p>
+</body>
+</html>
